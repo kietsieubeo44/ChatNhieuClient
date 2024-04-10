@@ -57,7 +57,7 @@
             this.btn_GuiFile.TabIndex = 3;
             this.btn_GuiFile.Text = "Gửi File";
             this.btn_GuiFile.UseVisualStyleBackColor = true;
-            this.btn_GuiFile.Click += new System.EventHandler(this.btn_GuiFile_Click_1);
+            
             // 
             // btn_GuiTinNhan
             // 
@@ -67,7 +67,7 @@
             this.btn_GuiTinNhan.TabIndex = 4;
             this.btn_GuiTinNhan.Text = "GỬi Tin Nhắn";
             this.btn_GuiTinNhan.UseVisualStyleBackColor = true;
-            this.btn_GuiTinNhan.Click += new System.EventHandler(this.btn_GuiTinNhan_Click_1);
+           
             // 
             // client
             // 

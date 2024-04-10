@@ -29,7 +29,7 @@ namespace client
                 _reader = new StreamReader(_stream);
                 _writer = new StreamWriter(_stream);
 
-                // Bắt đầu lắng nghe dữ liệu từ server trong một luồng mới
+                // Start receiving data from the server in a new thread
                 Thread receiveThread = new Thread(ReceiveData);
                 receiveThread.IsBackground = true;
                 receiveThread.Start();
@@ -69,11 +69,6 @@ namespace client
             txt_Nhan.AppendText(message + Environment.NewLine);
         }
 
-        private void btn_GuiTinNhan_Click(object sender, EventArgs e)
-        {
-        
-        }
-
         private void SendMessage(string message)
         {
             try
@@ -85,11 +80,6 @@ namespace client
             {
                 MessageBox.Show("Lỗi khi gửi tin nhắn: " + ex.Message);
             }
-        }
-
-        private void btn_GuiFile_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void SendFile(string filePath)
@@ -106,7 +96,7 @@ namespace client
             }
         }
 
-        private void btn_GuiTinNhan_Click_1(object sender, EventArgs e)
+        private void btn_GuiTinNhan_Click(object sender, EventArgs e)
         {
             string message = txt_Gui.Text;
             if (!string.IsNullOrEmpty(message))
@@ -116,7 +106,7 @@ namespace client
             }
         }
 
-        private void btn_GuiFile_Click_1(object sender, EventArgs e)
+        private void btn_GuiFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "All files (*.*)|*.*";
