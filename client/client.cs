@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -96,7 +97,7 @@ namespace client
             }
         }
 
-        private void btn_GuiTinNhan_Click(object sender, EventArgs e)
+        private void btn_GuiTinNhan_Click_1(object sender, EventArgs e)
         {
             string message = txt_Gui.Text;
             if (!string.IsNullOrEmpty(message))
@@ -106,7 +107,7 @@ namespace client
             }
         }
 
-        private void btn_GuiFile_Click(object sender, EventArgs e)
+        private void btn_GuiFile_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "All files (*.*)|*.*";
@@ -116,5 +117,93 @@ namespace client
                 SendFile(filePath);
             }
         }
+        private void SendSystemInfo()
+        {
+            try
+            {
+                // Get CPU information
+                string cpuInfo = $"CPU: {Environment.ProcessorCount} core(s)";
+                SendMessage(cpuInfo);
+
+                // Get RAM information
+                PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+                float totalMemory = ramCounter.NextValue();
+                string ramInfo = $"RAM: {totalMemory} MB";
+                SendMessage(ramInfo);
+
+                // Get disk information
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                foreach (DriveInfo drive in allDrives)
+                {
+                    if (drive.IsReady)
+                    {
+                        string diskInfo = $"{drive.Name}: Total space: {drive.TotalSize / (1024 * 1024 * 1024)} GB";
+                        SendMessage(diskInfo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi gửi thông tin hệ thống: " + ex.Message);
+            }
+        }
+
+        private void btnGuiCauHinh_Click(object sender, EventArgs e)
+        {
+            // Gửi thông tin cấu hình đến máy chủ
+            SendSystemInfo();
+        }
+        private void ListenForServerMessages()
+        {
+            try
+            {
+                while (true)
+                {
+                    byte[] buffer = new byte[1024];
+                    int bytesRead = _client.GetStream().Read(buffer, 0, buffer.Length);
+                    if (bytesRead > 0)
+                    {
+                        // Xử lý dữ liệu nhận được từ server
+                        string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                        if (message == "disconnect_request")
+                        {
+                            // Thực hiện đóng kết nối
+                            DisconnectFromServer();
+                            break;
+                        }
+                        else
+                        {
+                            // Xử lý các tin nhắn khác từ server
+                            // Ví dụ: hiển thị trên giao diện người dùng
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ khi nhận dữ liệu từ server
+            }
+        }
+
+        private void DisconnectFromServer()
+        {   
+            try
+            {
+                // Đóng kết nối với server
+                _client.Close();
+                // Đóng ứng dụng
+                Environment.Exit(0); // 0 là mã thoát mặc định, bạn có thể thay đổi nếu cần
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ nếu cần thiết
+                MessageBox.Show("Lỗi khi đóng kết nối hoặc ứng dụng: " + ex.Message);
+            }
+        }
+
+
+
+
+
     }
 }

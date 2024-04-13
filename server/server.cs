@@ -167,6 +167,71 @@ namespace server
 
         }
 
+
+        private void btn_TatMayClient_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra xem có client nào đang kết nối hay không
+            if (_clients.Count > 0)
+            {
+                // Trong ví dụ này, chúng ta sẽ ngắt kết nối với client đầu tiên trong danh sách
+                TcpClient clientCanNgatKetNoi = _clients[0]; // Bạn có thể điều chỉnh dựa trên logic của bạn
+
+                // Ngắt kết nối với client đã chọn
+                NgatKetNoiClient(clientCanNgatKetNoi);
+            }
+            else
+            {
+                MessageBox.Show("Không có client để ngắt kết nối.");
+            }
+        }
+
+        private void NgatKetNoiClient(TcpClient client)
+        {
+            try
+            {
+                // Gửi một tin nhắn yêu cầu ngắt kết nối đến client
+                string disconnectMessage = "disconnect_request";
+                byte[] disconnectBytes = Encoding.ASCII.GetBytes(disconnectMessage);
+                client.GetStream().Write(disconnectBytes, 0, disconnectBytes.Length);
+
+                // Đóng kết nối của client
+                client.Close();
+                // Xóa client khỏi danh sách các client đang kết nối
+                _clients.Remove(client);
+                // Tùy chọn: Thông báo cho máy chủ hoặc cập nhật giao diện người dùng
+                AppendMessage("Client đã ngắt kết nối.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi ngắt kết nối client: " + ex.Message);
+            }
+        }
+
+
+
+        private void TatClient(TcpClient client)
+        {
+            try
+            {
+                // Gửi một tín hiệu đến client yêu cầu ngắt kết nối
+                byte[] disconnectSignal = Encoding.ASCII.GetBytes("disconnect");
+                client.GetStream().Write(disconnectSignal, 0, disconnectSignal.Length);
+
+                // Đóng kết nối của client
+                client.Close();
+                // Xóa client khỏi danh sách các client đang kết nối
+                _clients.Remove(client);
+                // Tùy chọn: Thông báo cho máy chủ hoặc cập nhật giao diện người dùng
+                AppendMessage("Client đã bị tắt kết nối.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tắt kết nối client: " + ex.Message);
+            }
+        }
+
+
+
         // Các sự kiện và phương thức khác cần được triển khai
 
     }

@@ -36,6 +36,7 @@
             this.btn_GuiFile = new System.Windows.Forms.Button();
             this.txt_NhapTinNhan = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_TatMayClient = new System.Windows.Forms.Button();
             this.ChaxBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +65,7 @@
             this.panel2.Controls.Add(this.txt_DanhBa);
             this.panel2.Location = new System.Drawing.Point(460, 22);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(218, 502);
+            this.panel2.Size = new System.Drawing.Size(218, 439);
             this.panel2.TabIndex = 1;
             // 
             // txt_DanhBa
@@ -75,7 +76,7 @@
             this.txt_DanhBa.Location = new System.Drawing.Point(0, 0);
             this.txt_DanhBa.Multiline = true;
             this.txt_DanhBa.Name = "txt_DanhBa";
-            this.txt_DanhBa.Size = new System.Drawing.Size(218, 502);
+            this.txt_DanhBa.Size = new System.Drawing.Size(218, 439);
             this.txt_DanhBa.TabIndex = 0;
             // 
             // btn_GuiTinNhan
@@ -115,18 +116,29 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Danh Bạ";
             // 
-            // Form1
+            // btn_TatMayClient
+            // 
+            this.btn_TatMayClient.Location = new System.Drawing.Point(460, 467);
+            this.btn_TatMayClient.Name = "btn_TatMayClient";
+            this.btn_TatMayClient.Size = new System.Drawing.Size(101, 57);
+            this.btn_TatMayClient.TabIndex = 6;
+            this.btn_TatMayClient.Text = "Tắt CLinet";
+            this.btn_TatMayClient.UseVisualStyleBackColor = true;
+            this.btn_TatMayClient.Click += new System.EventHandler(this.btn_TatMayClient_Click);
+            // 
+            // server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 538);
+            this.Controls.Add(this.btn_TatMayClient);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_NhapTinNhan);
             this.Controls.Add(this.btn_GuiFile);
             this.Controls.Add(this.btn_GuiTinNhan);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.ChaxBox);
-            this.Name = "Form1";
+            this.Name = "server";
             this.Text = "Server";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ChaxBox.ResumeLayout(false);
@@ -148,6 +160,7 @@
         private System.Windows.Forms.Button btn_GuiFile;
         private System.Windows.Forms.TextBox txt_NhapTinNhan;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_TatMayClient;
     }
 }
 

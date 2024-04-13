@@ -32,6 +32,8 @@
             this.txt_Gui = new System.Windows.Forms.TextBox();
             this.btn_GuiFile = new System.Windows.Forms.Button();
             this.btn_GuiTinNhan = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnGuiCauHinh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txt_Nhan
@@ -57,7 +59,7 @@
             this.btn_GuiFile.TabIndex = 3;
             this.btn_GuiFile.Text = "Gửi File";
             this.btn_GuiFile.UseVisualStyleBackColor = true;
-            
+            this.btn_GuiFile.Click += new System.EventHandler(this.btn_GuiFile_Click_1);
             // 
             // btn_GuiTinNhan
             // 
@@ -67,13 +69,24 @@
             this.btn_GuiTinNhan.TabIndex = 4;
             this.btn_GuiTinNhan.Text = "GỬi Tin Nhắn";
             this.btn_GuiTinNhan.UseVisualStyleBackColor = true;
-           
+            this.btn_GuiTinNhan.Click += new System.EventHandler(this.btn_GuiTinNhan_Click_1);
+            // 
+            // btnGuiCauHinh
+            // 
+            this.btnGuiCauHinh.Location = new System.Drawing.Point(361, 362);
+            this.btnGuiCauHinh.Name = "btnGuiCauHinh";
+            this.btnGuiCauHinh.Size = new System.Drawing.Size(75, 23);
+            this.btnGuiCauHinh.TabIndex = 5;
+            this.btnGuiCauHinh.Text = "CauHinh";
+            this.btnGuiCauHinh.UseVisualStyleBackColor = true;
+            this.btnGuiCauHinh.Click += new System.EventHandler(this.btnGuiCauHinh_Click);
             // 
             // client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(644, 430);
+            this.Controls.Add(this.btnGuiCauHinh);
             this.Controls.Add(this.btn_GuiTinNhan);
             this.Controls.Add(this.btn_GuiFile);
             this.Controls.Add(this.txt_Gui);
@@ -91,6 +104,8 @@
         private System.Windows.Forms.TextBox txt_Gui;
         private System.Windows.Forms.Button btn_GuiFile;
         private System.Windows.Forms.Button btn_GuiTinNhan;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnGuiCauHinh;
     }
 }
 
